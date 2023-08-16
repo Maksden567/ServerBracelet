@@ -3,6 +3,7 @@ import mongoose from 'mongoose'
 import 'dotenv/config'
 import cors from 'cors'
 import authRouter from './routes/AuthRouter.js'
+import ProductRoute from './routes/ProductRoute.js'
 
 const app= express()
 app.use(express.json())
@@ -18,6 +19,7 @@ mongoose.connect(`mongodb://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD
 )
 
 app.use("/auth",authRouter)
+app.use('/products',ProductRoute)
 
 app.listen(5000,()=>{
     console.log('server start')
