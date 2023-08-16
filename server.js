@@ -12,7 +12,7 @@ app.use(cors({
     
 }))
 
-mongoose.connect(`mongodb://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@vs194.mirohost.net:27017`).then(
+mongoose.connect(`mongodb://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@vs194.mirohost.net:27017/test`).then(
 
     console.log('DB START')
 )
