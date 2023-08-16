@@ -9,6 +9,8 @@ app.use(cors({
     credentials:true,
     
 }))
+
+
 mongoose.connect(`mongodb://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@vs194.mirohost.net:27017`).then(
     console.log('DB START')
 )
