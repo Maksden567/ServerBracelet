@@ -20,9 +20,7 @@ mongoose.connect(`mongodb://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD
 
 app.use("/auth",authRouter)
 app.use('/products',ProductRoute)
-app.get('/',(req,res)=>{
-    res.json('OK')
-})
+
 
 app.listen(5000,()=>{
     console.log('server start')

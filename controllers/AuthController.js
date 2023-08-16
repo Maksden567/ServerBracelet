@@ -29,14 +29,21 @@ class AuthController {
 
 
     async changePassword(req,res){
-        const {password}=req.body
-        const {id}=req.params
+        const {oldpassword,password}=req.body
+        const {id}=req.user
         const User=mongoose.model('User',UserSchema)
+        const userCheck= await User.findById(id)
+        
+        const isCheckPassword= bcrypt.compareSync(oldpassword,userCheck.password)
+        if(!isCheckPassword){
+            return res.status(400).json('Ви не маєте права змінити пароль')
+        }
+        
         const salt = bcrypt.genSaltSync(10);
         const passwordHash = bcrypt.hashSync(password, salt);
         const user=await User.findByIdAndUpdate(id,{password:passwordHash})
-        await user.save()
-        res.json(user)
+        
+        return res.json(user)
     }
 
 
