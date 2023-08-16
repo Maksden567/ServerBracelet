@@ -56,7 +56,7 @@ class AuthController {
 
     async login(req,res){
         const {name,password}=req.body
-        console.log(name,password)
+        console.log(req.body)
         const User=mongoose.model('User',UserSchema)
         const user=await User.findOne({name:name})
         if(!user){
