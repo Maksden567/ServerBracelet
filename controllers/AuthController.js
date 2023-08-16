@@ -58,7 +58,7 @@ class AuthController {
             return res.status(404).json('Не має такого юзера')
         }
        console.log(user)
-        const checkPassword=bcrypt.compareSync(password,user[0].password)
+        const checkPassword=bcrypt.compareSync(password,user.password)
         if(!checkPassword){
             return res.status(404).json('Не правильно введені дані')
         }
