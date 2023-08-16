@@ -56,9 +56,6 @@ class AuthController {
 
     async login(req,res){
         const {name,password}=req.body
-        if(!name||!password){
-            return res.status(404).json('Не вказані дані')
-        }
         const User=mongoose.model('User',UserSchema)
         const user=await User.findOne({name:name})
         if(user.length==0){
