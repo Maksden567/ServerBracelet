@@ -58,7 +58,7 @@ class AuthController {
         const {name,password}=req.body
         const User=mongoose.model('User',UserSchema)
         const user=await User.findOne({name:name})
-        if(user.length==0){
+        if(!user){
             return res.status(404).json('Не має такого юзера')
         }
        console.log(user)
