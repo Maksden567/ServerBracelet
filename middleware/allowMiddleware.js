@@ -1,9 +1,9 @@
 
- export const allowsMiddleware = (permisions) => {
+ export const allowMiddleware = (permisions) => {
     return (req,res,next)=>{
 
         const userRole = req.user.role
-
+        console.log(userRole)
         if(permisions.includes(userRole)){
             next()
         }

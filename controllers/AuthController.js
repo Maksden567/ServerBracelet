@@ -1,6 +1,8 @@
 import mongoose from "mongoose"
 import UserSchema from "../models/User.model.js"
 import bcrypt from "bcrypt"
+import jwt from 'jsonwebtoken'
+import 'dotenv/config'
 
 class AuthController {
     async registerUser(req,res){
@@ -8,7 +10,7 @@ class AuthController {
         const User=mongoose.model('User',UserSchema)
         const salt = bcrypt.genSaltSync(10);
         const passwordHash = bcrypt.hashSync(password, salt);
-        const isCheckUser=await User.find({name:name})
+        const isCheckUser=await User.findOne({name:name})
         if(isCheckUser){
             return res.status(400).json('Такий юзер є в системі')
         }
@@ -21,6 +23,11 @@ class AuthController {
         await user.save()
         res.json(user)
     }
+
+
+
+
+
     async changePassword(req,res){
         const {password}=req.body
         const {id}=req.params
@@ -31,13 +38,35 @@ class AuthController {
         await user.save()
         res.json(user)
     }
+
+
+
     async getUsers(req,res){
-        // const {name,password}=req.body
         const User=mongoose.model('User',UserSchema)
-        
         const users= await User.find()
-        
         res.json(users)
+    }
+
+    async login(req,res){
+        const {name,password}=req.body
+        if(!name||!password){
+            return res.status(404).json('Не вказані дані')
+        }
+        const User=mongoose.model('User',UserSchema)
+        const user=await User.findOne({name:name})
+        if(user.length==0){
+            return res.status(404).json('Не має такого юзера')
+        }
+       console.log(user)
+        const checkPassword=bcrypt.compareSync(password,user[0].password)
+        if(!checkPassword){
+            return res.status(404).json('Не правильно введені дані')
+        }
+        const id=user.id
+        const role=user.role
+        const token=jwt.sign({id,role},process.env.JWT_SECRET,{expiresIn:'24h'})
+
+        return res.json({token})
     }
 }
 
