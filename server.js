@@ -13,6 +13,9 @@ mongoose.connect(`mongodb://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD
     console.log('DB START')
 )
 
+app.get("/user",(req,res)=>{
+    res.json("Привет Макс")
+})
 
 app.listen(5000,()=>{
     console.log('server start')
