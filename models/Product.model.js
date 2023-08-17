@@ -19,11 +19,13 @@ export const ProductSchema = new Schema({
     },
 
     collection_id:{
-        type:Number,
-        default:0
+        type:Schema.Types.ObjectId,
+        ref:'Collection',
+        require:true
     },
     category_id:{
-        type:Number,
+        type:Schema.Types.ObjectId,
+        ref:'Categories',
         require:true
     },
     size:[Number],

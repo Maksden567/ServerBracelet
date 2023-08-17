@@ -8,7 +8,7 @@ export const authMiddleware = (req,res,next) => {
         const token = req.headers.authorization
 
         if(!token){
-            return res.json('Помилка при вході  систему')
+            return res.status(400).json('Помилка при вході  систему')
         }
     
         const decoded = jwt.verify(token,process.env.JWT_SECRET)
@@ -18,7 +18,7 @@ export const authMiddleware = (req,res,next) => {
         next()
     } catch (error) {
         
-        return res.json('Помилка при вході  систему')
+        return res.status(400).json('Помилка при вході  систему')
 
     }
 
