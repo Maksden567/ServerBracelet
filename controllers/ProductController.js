@@ -1,5 +1,7 @@
 import {ProductSchema} from '../models/Product.model.js'
 import mongoose from 'mongoose'
+import CollectionController from './CollectionController.js'
+import CategoryController from './CategoryController.js'
 
 class ProductController{
     
@@ -13,7 +15,11 @@ class ProductController{
 
     async getEnableProduct(req,res){
         const ProductModel = mongoose.model('products',ProductSchema)
+        
         const products = await ProductModel.find({enabled:true})
+
+
+       
         res.json(products)
     }
 
@@ -26,7 +32,7 @@ class ProductController{
             name_en,
             fullPrice,
             article,
-            category_id,
+            collection_id,
             category_id,
             size,
             description_en,
@@ -52,7 +58,7 @@ class ProductController{
             name_en,
             fullPrice,
             article,
-            category_id,
+            collection_id,
             category_id,
             size,
             description_en,
