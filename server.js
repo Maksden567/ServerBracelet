@@ -25,6 +25,7 @@ app.use('/products',ProductRoute)
 app.use('/categories',CategoryRouter)
 app.use('/collections',CollectionRouter)
 
+
 app.listen(5000,()=>{
     console.log('server start')
 })

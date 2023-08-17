@@ -7,7 +7,7 @@ import {allowMiddleware} from '../middleware/allowMiddleware.js'
 
 authRouter.post('/registerUser',authMiddleware,allowMiddleware(['superAdmin']),AuthController.registerUser)
 authRouter.post('/login',AuthController.login)
-authRouter.put('/changePassword/:id',AuthController.changePassword)
+authRouter.put('/changePassword',authMiddleware,AuthController.changePassword)
 authRouter.get('/users',AuthController.getUsers)
 
 export default authRouter
