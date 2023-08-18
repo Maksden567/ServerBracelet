@@ -10,5 +10,6 @@ CollectionRoute.post('/create',authMiddleware,allowMiddleware(['superAdmin']),Co
 CollectionRoute.put('/update/:id',authMiddleware,allowMiddleware(['superAdmin']),CollectionController.updateCollection)
 CollectionRoute.get('/all',authMiddleware,allowMiddleware(['superAdmin']),CollectionController.getAllCollections)
 CollectionRoute.get('/enabled',CollectionController.getEnabledCollections)
+CollectionRoute.delete('/delete/:id',CollectionController.deleteCollection)
 
 export default CollectionRoute
