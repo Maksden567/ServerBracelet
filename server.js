@@ -8,13 +8,9 @@ import CategoryRouter from './routes/CategoryRouter.js'
 import CollectionRouter from './routes/CollectionRouter.js'
 import multer from 'multer'
 import {storage} from './firebase.js'
-import  {
-    ref,
-    uploadBytesResumable,
-    listAll,
-    deleteObject,
-  } from "firebase/storage"
+import  {ref,uploadBytesResumable,listAll,deleteObject,} from "firebase/storage"
 import OrderRouter from './routes/OrderRouter.js'
+import SendRouter from './routes/SendRouter.js'
 
 const app= express()
 app.use(express.json())
@@ -61,6 +57,7 @@ app.use('/products',ProductRoute)
 app.use('/categories',CategoryRouter)
 app.use('/collections',CollectionRouter)
 app.use('/orders',OrderRouter)
+app.use('/letter',SendRouter)
 
 app.listen(5000,()=>{
     console.log('server start')

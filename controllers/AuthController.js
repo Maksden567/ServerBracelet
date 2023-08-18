@@ -3,7 +3,7 @@ import UserSchema from "../models/User.model.js"
 import bcrypt from "bcrypt"
 import jwt from 'jsonwebtoken'
 import 'dotenv/config'
-import send from "../mailer/mailer.js"
+
 
 class AuthController {
     async registerUser(req,res){
@@ -50,10 +50,10 @@ class AuthController {
 
 
     async getUsers(req,res){
-        const {to,subject,html}=req.body
+       
         const User=mongoose.model('User',UserSchema)
         const users= await User.find()
-        send(to,subject,html)
+      
         res.json(users)
     }
 
