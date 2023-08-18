@@ -10,5 +10,6 @@ ProductRoute.post('/create',authMiddleware, allowMiddleware(['superAdmin']),Prod
 ProductRoute.put('/update/:id',authMiddleware, allowMiddleware(['superAdmin']),ProductController.updateProduct)
 ProductRoute.get('/all', authMiddleware, allowMiddleware(['superAdmin']),ProductController.getAllProduct)
 ProductRoute.get('/enabled',ProductController.getEnableProduct)
+ProductRoute.delete('/delete/:id',ProductController.productDelete)
 
 export default ProductRoute
