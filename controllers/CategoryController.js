@@ -52,6 +52,12 @@ class CategoryControler {
         const categories = await CategoriesModel.find({enabled:true})
         return res.json(categories)
     }
+    async deleteCategory(req,res){
+        const {id} = req.params
+        const CategoriesModel = mongoose.model('Categories',CategorySchema)
+        const item = await CategoriesModel.findByIdAndDelete(id)
+        res.json(item)
+    }
 }
 
 export default new CategoryControler

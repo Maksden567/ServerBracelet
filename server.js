@@ -14,7 +14,7 @@ import  {
     listAll,
     deleteObject,
   } from "firebase/storage"
-
+import OrderRouter from './routes/OrderRouter.js'
 
 const app= express()
 app.use(express.json())
@@ -60,7 +60,7 @@ app.use("/auth",authRouter)
 app.use('/products',ProductRoute)
 app.use('/categories',CategoryRouter)
 app.use('/collections',CollectionRouter)
-
+app.use('/orders',OrderRouter)
 
 app.listen(5000,()=>{
     console.log('server start')

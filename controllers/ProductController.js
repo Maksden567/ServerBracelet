@@ -71,6 +71,13 @@ class ProductController{
         res.json(product)
 
     }
+
+    async productDelete(req,res){
+        const {id} = req.params
+        const ProductModel = mongoose.model('products',ProductSchema)
+        const item = await ProductModel.findByIdAndDelete(id)
+        res.json(item)
+    }
 }
 
 export default new ProductController

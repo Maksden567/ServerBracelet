@@ -49,6 +49,13 @@ class CollectionController {
         const collections = await CollectionModel.find({enabled:true})
         return res.json(collections)
     }
+
+    async deleteCollection(req,res){
+        const {id} = req.params
+        const CollectionModel = mongoose.model('Collection',CollectionSchema)
+        const item = await CollectionModel.findByIdAndDelete(id)
+        res.json(item)
+    }
 }
 
 export default new CollectionController
