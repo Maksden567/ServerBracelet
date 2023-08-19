@@ -36,7 +36,7 @@ export const ProductSchema = new Schema({
     media:{
         images:[String],
         video:[String],
-        require:true
+       
     },
 
     recommended:{
