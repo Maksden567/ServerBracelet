@@ -6,6 +6,9 @@ class CategoryControler {
 
     async postCategory(req,res){
         const {name_ua,name_en,title_en,title_ua,enabled,media}= req.body
+        if(!name_en||name_ua||!title_en||!title_ua||!media){
+            return res.status(403).json('Недостатньо обовязкових параметрів')
+        }
         const CategoriesModel = mongoose.model('Categories',CategorySchema)
         const category = new CategoriesModel({
             name_ua,
@@ -21,6 +24,9 @@ class CategoryControler {
     async updateCategory(req,res){
         const {name_ua,name_en,title_en,title_ua,enabled,media}= req.body
         const {id} = req.params
+        if(!name_en||name_ua||!title_en||!title_ua||!media){
+            return res.status(403).json('Недостатньо обовязкових параметрів')
+        }
         const CategoriesModel = mongoose.model('Categories',CategorySchema)
       
         const category = await CategoriesModel.findByIdAndUpdate(id,{
@@ -32,6 +38,9 @@ class CategoryControler {
             media
         },{returnDocument:'after'})
 
+        if(!category){
+            return res.status(404).json('Такої категорії не існує')
+        }
        
         if(category.enabled == false){
             const ProductModel = mongoose.model('products',ProductSchema)

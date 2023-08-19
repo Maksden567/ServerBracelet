@@ -5,6 +5,9 @@ class CollectionController {
 
     async postCollection(req,res){
         const {name_ua,name_en,title_en,title_ua,enabled,media}= req.body
+        if(!name_en||name_ua||!title_en||!title_ua||!media){
+            return res.status(403).json('Недостатньо обовязкових параметрів')
+        }
         const CollectionModel = mongoose.model('Collection',CollectionSchema)
         const collection = new CollectionModel({
             name_ua,
@@ -19,6 +22,9 @@ class CollectionController {
     }
     async updateCollection(req,res){
         const {name_ua,name_en,title_en,title_ua,enabled,media}= req.body
+        if(!name_en||name_ua||!title_en||!title_ua||!media){
+            return res.status(403).json('Недостатньо обовязкових параметрів')
+        }
         const {id} = req.params
         const CollectionModel = mongoose.model('Collection',CollectionSchema)
         const collection = await CollectionModel.findByIdAndUpdate(id,{
@@ -29,6 +35,11 @@ class CollectionController {
             enabled,
             media
         },{returnDocument:'after'})
+
+
+        if(!collection){
+            return res.status(404).json('ТакоЇ колекції не існує')
+        }
 
         if(collection.enabled == false){
             const ProductModel = mongoose.model('products',ProductSchema)

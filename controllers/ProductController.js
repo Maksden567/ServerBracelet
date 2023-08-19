@@ -26,6 +26,9 @@ class ProductController{
     async createProduct(req,res){
 
         const {name_ua,name_en,fullPrice,article,collection_id,category_id,size,description_ua,description_en,media,recommended,enabled}=req.body
+        if(!name_en||name_ua||!fullPrice||!media||!article||!collection_id||!category_id||!description_en||!description_ua||!media||!recommended){
+            return res.status(403).json('Недостатньо обовязкових параметрів')
+        }
         const ProductModel = mongoose.model('products',ProductSchema)
         const product = new ProductModel({
             name_ua,
@@ -51,6 +54,9 @@ class ProductController{
 
     async updateProduct(req,res){
         const {name_ua,name_en,fullPrice,article,collection_id,category_id,size,description_ua,description_en,media,recommended,enabled}=req.body
+        if(!name_en||name_ua||!fullPrice||!media||!article||!collection_id||!category_id||!description_en||!description_ua||!media||!recommended){
+            return res.status(403).json('Недостатньо обовязкових параметрів')
+        }
         const {id} = req.params
         const ProductModel = mongoose.model('products',ProductSchema)
         const product =await ProductModel.findByIdAndUpdate(id,{
@@ -68,6 +74,9 @@ class ProductController{
             recommended
         },{returnDocument:'after'})
 
+        if(!product){
+            return res.status(403).json('Продукта з таким id немає')
+        }
         res.json(product)
 
     }

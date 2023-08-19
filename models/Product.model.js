@@ -36,6 +36,7 @@ export const ProductSchema = new Schema({
     media:{
         images:[String],
         video:[String],
+        require:true
     },
 
     recommended:{
@@ -45,8 +46,7 @@ export const ProductSchema = new Schema({
     },
     enabled:{
         type:Boolean,
-        default:true,
-        require:true
+        default:true
     }
 
 

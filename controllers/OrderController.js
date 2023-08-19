@@ -9,15 +9,23 @@ class OrderController {
     async createProductOrder(req,res){
 
         const {orders,merchData} = req.body
+        if(!orders.id||!orders.quantity||!merchData){
+             return res.status(403).json('Не має обовязкових параметрів')
+        }
 
         const products = await Promise.all(orders.map( async function(item){
             const ProductModel = mongoose.model('products',ProductSchema)
             const productItem =  await ProductModel.findById(item.id)
+            if(!productItem){
+                return res.status(404).json("Не знайдено даного товара")
+            }
             return {productItem,quantity:item.quantity,size:item.size}
+
         }))
 
+        
+
         const productName = await Promise.all(products.map(item=>{
-            console.log(item)
             if(item.size){
                 return `${item.productItem.name_ua} (${item.size})`
             }

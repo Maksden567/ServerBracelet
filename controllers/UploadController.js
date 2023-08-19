@@ -10,7 +10,6 @@ class UploadController {
     async upload (req,res){
   
         try {
-    
                 const files=req.files
                 const products=[]
                 for (const item of files) {

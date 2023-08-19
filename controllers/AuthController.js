@@ -31,13 +31,19 @@ class AuthController {
 
     async changePassword(req,res){
         const {oldpassword,password}=req.body
+        if(!oldpassword){
+           return res.status(401).json('Не має старого пароля')
+        }
+        if(!password){
+            return res.status(402).json('Не має нового пароля')
+         }
         const {id}=req.user
         const User=mongoose.model('User',UserSchema)
         const userCheck= await User.findById(id)
         
         const isCheckPassword= bcrypt.compareSync(oldpassword,userCheck.password)
         if(!isCheckPassword){
-            return res.status(400).json('Ви не маєте права змінити пароль')
+            return res.status(403).json('Ви не маєте права змінити пароль')
         }
         
         const salt = bcrypt.genSaltSync(10);
@@ -59,17 +65,18 @@ class AuthController {
 
     async login(req,res){
         const {name,password}=req.body
-        console.log(req.body)
+        if(!name || ! password){
+            return res.status(401).json("Недостатньо даних")
+        }
         const User=mongoose.model('User',UserSchema)
         const user=await User.findOne({name:name})
         if(!user){
             return res.status(404).json('Не має такого юзера')
         }
         
-       console.log(user)
         const checkPassword=bcrypt.compareSync(password,user.password)
         if(!checkPassword){
-            return res.status(404).json('Не правильно введені дані')
+            return res.status(403).json('Не правильно введені дані')
         }
         const id=user.id
         const role=user.role

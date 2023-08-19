@@ -20,7 +20,6 @@ export const CollectionSchema = new Schema({
     },
     enabled:{
         type:Boolean,
-        require:true,
         default:true
     },
     media:{
