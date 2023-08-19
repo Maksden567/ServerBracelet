@@ -20,7 +20,7 @@ export const CategorySchema = new Schema({
     },
     enabled:{
         type:Boolean,
-        require:true,
+        
         default:true
     },
     media:{

@@ -10,6 +10,5 @@ CategoryRouter.post('/create',authMiddleware,allowMiddleware(['superAdmin']),Cat
 CategoryRouter.put('/update/:id',authMiddleware,allowMiddleware(['superAdmin']),CategoryController.updateCategory)
 CategoryRouter.get('/all',authMiddleware,allowMiddleware(['superAdmin']),CategoryController.getAllCategories)
 CategoryRouter.get('/enabled',CategoryController.getEnableCategories)
-CategoryRouter.delete('/delete/:id',CategoryController.deleteCategory)
 
 export default CategoryRouter

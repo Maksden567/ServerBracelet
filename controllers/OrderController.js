@@ -100,6 +100,32 @@ class OrderController {
 
     }
 
+    async getOrderReference(req,res){
+        let orderReference;
+        const OrderModel = mongoose.model('Orders',OrderSchema)
+        const ordersDB = await OrderModel.find()
+        if(ordersDB.length==0){
+            orderReference=1
+            const order = new OrderModel({
+                orderReference
+            })
+            await order.save()
+        }
+
+        else{
+            const lastOrder = ordersDB[ordersDB.length-1]
+            orderReference=lastOrder.orderReference+1
+            const order = new OrderModel({
+                orderReference
+            })
+            await order.save()
+
+        }
+        res.json(orderReference)
+    }
+
+   
+
 
 }
 
