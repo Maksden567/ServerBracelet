@@ -13,11 +13,18 @@ class OrderController {
         const products = await Promise.all(orders.map( async function(item){
             const ProductModel = mongoose.model('products',ProductSchema)
             const productItem =  await ProductModel.findById(item.id)
-            return {productItem,quantity:item.quantity}
+            return {productItem,quantity:item.quantity,size:item.size}
         }))
 
         const productName = await Promise.all(products.map(item=>{
-            return item.productItem.name_ua
+            console.log(item)
+            if(item.size){
+                return `${item.productItem.name_ua} (${item.size})`
+            }
+            else{
+                return item.productItem.name_ua
+            }
+            
         }))
 
         const productPrice = await Promise.all(products.map(item=>{
