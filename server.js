@@ -9,6 +9,8 @@ import CollectionRouter from './routes/CollectionRouter.js'
 import OrderRouter from './routes/OrderRouter.js'
 import SendRouter from './routes/SendRouter.js'
 import UploadRouter from './routes/UploadRoute.js'
+import SubCollectionsRouter from './routes/SubCollectionsRouter.js'
+import GalleryRoute from './routes/GalleryRoute.js'
 
 const app= express()
 app.use(express.json())
@@ -19,8 +21,7 @@ app.use(cors({
 }))
 
 
-
-mongoose.connect(`mongodb://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@vs194.mirohost.net:27017/test`).then(
+mongoose.connect(`mongodb://root:h4buErPeywGPzU570t@vs194.mirohost.net:27017/test`).then(
 
     console.log('DB START')
 )
@@ -32,6 +33,8 @@ app.use('/collections',CollectionRouter)
 app.use('/orders',OrderRouter)
 app.use('/letter',SendRouter)
 app.use("/upload", UploadRouter );
+app.use('/subcollections',SubCollectionsRouter)
+app.use('/galleries',GalleryRoute)
 app.listen(8000,()=>{
     console.log('server start')
 })

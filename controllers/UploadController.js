@@ -1,9 +1,6 @@
-
 import {storage} from '../firebase.js'
 import  {ref,uploadBytesResumable} from "firebase/storage"
-
-
-
+import 'dotenv/config'
 
 
 class UploadController {
@@ -16,7 +13,7 @@ class UploadController {
                 const imageRef = ref(storage, item.originalname);
                 const metatype = { contentType: item.mimetype, name: item.originalname };      
                 await uploadBytesResumable(imageRef, item.buffer, metatype);
-                products.push(`https://firebasestorage.googleapis.com/v0/b/server-462bc.appspot.com/o/${item.originalname}?alt=media`);
+                products.push(`https://firebasestorage.googleapis.com/v0/b/${process.env.STORAGE_BUCKET}/o/${item.originalname}?alt=media`);
             }
                 
                 return  res.json(

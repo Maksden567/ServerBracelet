@@ -6,7 +6,7 @@ import CategoryController from './CategoryController.js'
 class ProductController{
     
     async getAllProduct(req,res){
-
+        console.log(1)
         const ProductModel = mongoose.model('products',ProductSchema)
         const products = await ProductModel.find()
         res.json(products)
@@ -26,7 +26,7 @@ class ProductController{
     async createProduct(req,res){
 
         const {name_ua,name_en,fullPrice,article,collection_id,category_id,size,description_ua,description_en,media,recommended,enabled}=req.body
-        if(!name_en||name_ua||!fullPrice||!media||!article||!collection_id||!category_id||!description_en||!description_ua||!media||!recommended){
+        if(!name_en||!name_ua||!fullPrice||!article||!category_id||!description_en||!description_ua){
             return res.status(403).json('Недостатньо обовязкових параметрів')
         }
         const ProductModel = mongoose.model('products',ProductSchema)
@@ -54,7 +54,7 @@ class ProductController{
 
     async updateProduct(req,res){
         const {name_ua,name_en,fullPrice,article,collection_id,category_id,size,description_ua,description_en,media,recommended,enabled}=req.body
-        if(!name_en||name_ua||!fullPrice||!media||!article||!collection_id||!category_id||!description_en||!description_ua||!media||!recommended){
+        if(!name_en||!name_ua||!fullPrice||!article||!category_id||!description_en||!description_ua){
             return res.status(403).json('Недостатньо обовязкових параметрів')
         }
         const {id} = req.params

@@ -6,7 +6,7 @@ class CategoryControler {
 
     async postCategory(req,res){
         const {name_ua,name_en,title_en,title_ua,enabled,media}= req.body
-        if(!name_en||name_ua||!title_en||!title_ua||!media){
+        if(!name_en||!name_ua||!title_en||!title_ua){
             return res.status(403).json('Недостатньо обовязкових параметрів')
         }
         const CategoriesModel = mongoose.model('Categories',CategorySchema)
@@ -24,7 +24,7 @@ class CategoryControler {
     async updateCategory(req,res){
         const {name_ua,name_en,title_en,title_ua,enabled,media}= req.body
         const {id} = req.params
-        if(!name_en||name_ua||!title_en||!title_ua||!media){
+        if(!name_en||!name_ua||!title_en||!title_ua){
             return res.status(403).json('Недостатньо обовязкових параметрів')
         }
         const CategoriesModel = mongoose.model('Categories',CategorySchema)

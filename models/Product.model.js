@@ -19,9 +19,8 @@ export const ProductSchema = new Schema({
     },
 
     collection_id:{
-        type:Schema.Types.ObjectId,
-        ref:'Collection',
-        require:true
+        type:String,
+        default:"0"
     },
     category_id:{
         type:Schema.Types.ObjectId,
@@ -35,23 +34,17 @@ export const ProductSchema = new Schema({
 
     media:{
         images:[String],
-        video:[String],
+        video:[String]
        
     },
 
     recommended:{
         type:Boolean,
-        default:false,
-        require:true
+        default:false
     },
     enabled:{
         type:Boolean,
         default:true
     }
-
-
-
-
-
 
 })
