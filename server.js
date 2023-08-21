@@ -15,7 +15,7 @@ import GalleryRoute from './routes/GalleryRoute.js'
 const app= express()
 app.use(express.json())
 app.use(cors({
-    origin:'http://localhost:8080',
+    origin:['http://localhost:8080','https://braselet.com.ua'],
     credentials:true,
     
 }))
