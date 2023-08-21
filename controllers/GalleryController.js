@@ -33,7 +33,12 @@ class GalleryController {
     async getEnabled(req,res){
         const GalleryModel=mongoose.model('GalleryModel',GallerySchema)
         const galleries=await GalleryModel.find({enabled:true})
-        return res.json(galleries)
+        const galleryisFilter =  galleries.map(item=>{
+            const galleryFilter=item.images.filter(item1=>item1.enabled==true)
+            item.images=galleryFilter
+            return item
+        })
+        return res.json(galleryisFilter)
     }
     async updateGallery(req,res){
         const {name_ua,name_en,title_en,title_ua,images,media,enabled}=req.body
@@ -74,8 +79,13 @@ class GalleryController {
         const galleryFind = gallery.images.find(item=>item._id==imgID)
         galleryFind.enabled=enabled
         galleryFind.link=link
-
         await gallery.save()
+        return res.json(gallery)
+    }
+    async delete(req,res){
+        const {id}=req.params
+        const GalleryModel=mongoose.model('GalleryModel',GallerySchema)
+        const gallery=await GalleryModel.findByIdAndDelete(id)
         return res.json(gallery)
     }
 }

@@ -10,5 +10,6 @@ GalleryRoute.get('/all',authMiddleware,allowMiddleware(['superAdmin']),GalleryCo
 GalleryRoute.get('/enabled',GalleryController.getEnabled)
 GalleryRoute.put('/update/:id',authMiddleware,allowMiddleware(['superAdmin']),GalleryController.updateGallery)
 GalleryRoute.put('/update/:id/:imgID',authMiddleware,allowMiddleware(['superAdmin']),GalleryController.updateGalleryImg)
+GalleryRoute.delete('/delete/:id/',authMiddleware,allowMiddleware(['superAdmin']),GalleryController.delete)
 
 export default GalleryRoute

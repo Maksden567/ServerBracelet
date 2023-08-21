@@ -69,6 +69,12 @@ class SubCollectionsController{
 
         return res.json(subcollection)
     }
+
+    async getEnabledSubCollections (req,res){
+        const SubCollectionModel = mongoose.model('SubCollections',SubCollectionSchema)
+        const subcollections = await SubCollectionModel.find({enabled:true})
+        return res.json(subcollections)
+    }
 }
 
 export default new SubCollectionsController
