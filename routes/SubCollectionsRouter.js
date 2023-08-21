@@ -9,6 +9,7 @@ const SubCollectionsRouter = Router()
 SubCollectionsRouter.post('/create',authMiddleware,allowMiddleware(['superAdmin']),SubCollectionsController.createSubCollection)
 SubCollectionsRouter.get('/all',authMiddleware,allowMiddleware(['superAdmin']),SubCollectionsController.getAll)
 SubCollectionsRouter.put('/update/:id',authMiddleware,allowMiddleware(['superAdmin']),SubCollectionsController.updateSubCollections)
-SubCollectionsRouter.get('/enabled',SubCollectionsController.getEnabled)
+SubCollectionsRouter.get('/enabled',SubCollectionsController.getEnabledSubCollections)
+SubCollectionsRouter.delete('/delete/:id',SubCollectionsController.deleteOne)
 
 export default SubCollectionsRouter

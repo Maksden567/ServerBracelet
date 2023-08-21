@@ -75,6 +75,13 @@ class SubCollectionsController{
         const subcollections = await SubCollectionModel.find({enabled:true})
         return res.json(subcollections)
     }
+
+    async deleteOne(req,res){
+        const {id}  = req.params
+        const SubCollectionModel = mongoose.model('SubCollections',SubCollectionSchema)
+        const subcollection = await SubCollectionModel.findByIdAndDelete(id)
+        return res.json('Delete product')
+    }
 }
 
 export default new SubCollectionsController
