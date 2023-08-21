@@ -1,5 +1,7 @@
 import { Router } from "express";
 import GalleryController from "../controllers/GalleryController.js";
+import {authMiddleware} from '../middleware/authMiddleware.js'
+import {allowMiddleware} from '../middleware/allowMiddleware.js'
 
 const GalleryRoute=Router()
 

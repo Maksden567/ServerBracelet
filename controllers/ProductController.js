@@ -25,7 +25,7 @@ class ProductController{
 
     async createProduct(req,res){
 
-        const {name_ua,name_en,fullPrice,article,collection_id,category_id,size,description_ua,description_en,media,recommended,enabled}=req.body
+        const {name_ua,name_en,fullPrice,article,collection_id,category_id,size,description_ua,description_en,subcollection_id,media,recommended,enabled}=req.body
         if(!name_en||!name_ua||!fullPrice||!article||!category_id||!description_en||!description_ua){
             return res.status(403).json('Недостатньо обовязкових параметрів')
         }
@@ -42,7 +42,8 @@ class ProductController{
             description_ua,
             media,
             enabled,
-            recommended
+            recommended,
+            subcollection_id
         })
 
         await product.save()
@@ -53,7 +54,7 @@ class ProductController{
     }
 
     async updateProduct(req,res){
-        const {name_ua,name_en,fullPrice,article,collection_id,category_id,size,description_ua,description_en,media,recommended,enabled}=req.body
+        const {name_ua,name_en,fullPrice,article,collection_id,category_id,size,description_ua,description_en,media,subcollection_id,recommended,enabled}=req.body
         if(!name_en||!name_ua||!fullPrice||!article||!category_id||!description_en||!description_ua){
             return res.status(403).json('Недостатньо обовязкових параметрів')
         }
@@ -71,7 +72,8 @@ class ProductController{
             description_ua,
             media,
             enabled,
-            recommended
+            recommended,
+            subcollection_id
         },{returnDocument:'after'})
 
         if(!product){

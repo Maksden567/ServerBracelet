@@ -5,7 +5,9 @@ import { SubCollectionSchema } from "../models/SubCollection.js";
 class SubCollectionsController{
     async createSubCollection(req,res){
         const {parent_id,name_ua,name_en,title_ua,title_en,enabled,media} = req.body
-
+        if(!name_en||!name_ua||!title_en||!title_ua||!parent_id){
+            return res.status(403).json('Недостатньо обовязкових параметрів')
+        }
         const SubCollectionModel = mongoose.model('SubCollections',SubCollectionSchema)
         const subcollection = new SubCollectionModel({
             parent_id,
@@ -51,6 +53,9 @@ class SubCollectionsController{
     async updateSubCollections (req,res){
         const {parent_id,name_ua,name_en,title_ua,title_en,enabled,media} = req.body
         const {id} = req.params
+        if(!name_en||!name_ua||!title_en||!title_ua||!parent_id){
+            return res.status(403).json('Недостатньо обовязкових параметрів')
+        }
         const SubCollectionModel = mongoose.model('SubCollections',SubCollectionSchema)
         const subcollection = await SubCollectionModel.findByIdAndUpdate(id,{
             parent_id,
